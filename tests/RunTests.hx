@@ -111,13 +111,14 @@ class RunTests extends TestCase {
       travix.Logger.exit(500);
     
     var db:Db = new Db(
-      #if asys
-        new FsDriver()
-      #elseif (js && !nodejs)
-        new LocalStorageDriver()
-      #else
-        new MemoryDriver()
-      #end
+      new DynamoDbNodeDriver({dynamodb:{region: 'ap-southeast-1'}})
+      // #if asys
+      //   new FsDriver()
+      // #elseif (js && !nodejs)
+      //   new LocalStorageDriver()
+      // #else
+      //   new MemoryDriver()
+      // #end
     );
     
     var start = haxe.Timer.stamp();
